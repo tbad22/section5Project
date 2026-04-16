@@ -30,9 +30,18 @@ jobs:
         with:
           name: distribution-files
           path: dist
+          # path: |
+          #   dist
+          #   package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Get build artifacts
+        uses: actions/download-artifacts@v7
+        with:
+          name: distribution-files
+      - name: output dowloaded
+        run: ls -la
       - name: Deploy
         run: echo "Deploying..."
